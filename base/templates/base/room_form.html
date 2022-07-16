@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div>
+    <from action="create-room/" method="POST" >
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Send" />
+    </from>
+</div>
+
+{% endblock content %}
