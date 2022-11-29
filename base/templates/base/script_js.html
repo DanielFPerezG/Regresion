@@ -1,0 +1,165 @@
+
+<script>
+    var file_var = document.getElementById("model_file")
+    var wb_var = document.getElementById("model_wb")
+    var return_option = document.getElementById("return_select_option")
+
+    var first_button = document.querySelector("#button_model_file")
+    var second_button = document.querySelector("#button_model_wb")
+    var return_button = document.querySelector("#button_type_model")
+    var transversal_model_button = document.querySelector("#button_transversal_model")
+    var temporal_model_button = document.querySelector("#button_temporal_model")
+
+
+    var submit_content = document.getElementById("submit_content")
+    var button_content = document.getElementById("content_buttons_model")
+    var type_model_content = document.getElementById("type__model")
+
+
+    var count_model_file = 0
+    var count_model_wb = 0
+
+    second_button.addEventListener("click", function showoption() {
+    if (wb_var.style.display === "none"){
+
+        wb_var.style.display = "none"
+        file_var.style.display = "none"
+        
+        button_content.style.display = "none"
+        type_model_content.style.display = "grid"
+        type_model_content.style.justifyContent= "space-evenly" 
+
+        return_option.style.display = "block"
+
+        count_model_file = 0
+        count_model_wb = 1
+    }
+    else {
+        wb_var.style.display = "none"
+    }
+    })
+
+    first_button.addEventListener("click", function showoption() {
+    if (file_var.style.display === "none"){
+
+        file_var.style.display = "none"
+        wb_var.style.display = "none"
+
+        button_content.style.display = "none"
+        type_model_content.style.display = "grid"
+        type_model_content.style.justifyContent= "space-evenly" 
+
+        return_option.style.display = "block"
+
+        count_model_file = 1
+        count_model_wb = 0
+    }
+    else {
+        file_var.style.display = "none"
+    }
+    })
+
+    return_button.addEventListener("click", function showoption() {
+        if (button_content.style.display === "none"){
+            
+            file_var.style.display = "none"
+            wb_var.style.display = "none"
+    
+            button_content.style.display = "grid"
+            button_content.style.justifyContent= "space-evenly" 
+            type_model_content.style.display = "none"
+            
+            return_option.style.display = "none"
+            submit_content.style.display = "none"
+
+            count_model_file = 0
+            count_model_wb = 0
+        }
+        else {
+            file_var.style.display = "none"
+        }
+        })
+
+        transversal_model_button.addEventListener("click", function showoption() {
+            if (count_model_file == 1 && count_model_wb==0){
+                
+                type_model_content.style.display = "none"
+                wb_var.style.display = "none"
+                file_var.style.display = "block"
+
+                submit_content.style.display = "flex"
+                submit_content.style.justifyContent = "end"
+                
+            }
+            else if (count_model_file == 0 && count_model_wb==1){
+                type_model_content.style.display = "none"
+                wb_var.style.display = "block"
+                file_var.style.display = "none"
+
+                submit_content.style.display = "flex"
+                submit_content.style.justifyContent = "end"
+
+            }
+            else {
+                wb_var.style.display = "none"
+            }
+            })
+
+        temporal_model_button.addEventListener("click", function showoption() {
+            if (count_model_file == 1 && count_model_wb==0){
+                
+                type_model_content.style.display = "none"
+                wb_var.style.display = "none"
+                file_var.style.display = "block"
+                
+                submit_content.style.display = "flex"
+                submit_content.style.justifyContent = "end"
+            }
+            else {
+                wb_var.style.display = "none"
+            }
+            })
+    
+
+    function inputgenerator() {
+    var a = document.getElementById("NIndenVar").value
+    var form_input = document.getElementById("input_var").innerHTML=""
+    inputs(a)
+    }
+
+    function inputs(a) {
+    var form_input = document.getElementById("input_var")
+    for (let i = 0; i <= a; i++) {
+        
+        var box = document.createElement("div")
+        
+        form_input.appendChild(box)
+        if (i == 0){
+            box.innerHTML="<label for='lang'>Select Dependent Variable</label><input list='brow_var'><datalist id='brow_var'>{% for var in variable %}<option value='{{var.name}}'></option>{% endfor %}</datalist>"
+        }
+        else {
+            box.innerHTML="<label for='lang'>Select Independent Variable</label><input list='brow_var'><datalist id='brow_var'>{% for var in variable %}<option value='{{var.name}}'></option>{% endfor %}</datalist>"
+        }
+    }
+    }
+
+    function countrygenerator() {
+        var b = document.getElementById("NCountry").value
+        var form_country = document.getElementById("input_country").innerHTML=""
+        countries(b)
+        }
+    
+    function countries(b) {
+        var form_country = document.getElementById("input_country")
+        for (let i = 0; i <= b-1; i++) {
+            
+            var box_country = document.createElement("div")
+            
+            form_country.appendChild(box_country)
+            
+            box_country.innerHTML="<label for='lang'>Select Country</label><input list='brow_country'><datalist id='brow_country'>{% for cont in country %}<option value='{{cont.name}}'></option>{% endfor %}</datalist>"
+            console.log(i)
+        }
+        }
+
+</script>

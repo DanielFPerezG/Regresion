@@ -1,0 +1,144 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="create-room layout">
+<div class="container">
+    <div class="layout__box">
+        <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+            <a href="{% url 'home' %}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>arrow-left</title>
+                <path
+                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                </path>
+                </svg>
+            </a>
+            <h3>Create Model</h3>
+            </div>
+        </div>
+        <div class="layout__body">
+            <form id="return_select_option">
+                <a class="btn btn--dark" id="button_type_model">Select Data Origin</a>
+            </form>
+            
+            <form class="layout__body__model" action="" method="" id="content_buttons_model">
+                
+                <a class="btn btn--main" id="button_model_file">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <title>add</title>
+                    <path
+                        d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+                    ></path>
+                    </svg>
+                    Update File
+                </a>
+                <a class="btn btn--main" id="button_model_wb">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <title>add</title>
+                    <path
+                        d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+                    ></path>
+                    </svg>
+                    World Bank Data Base
+                </a>
+            </form>
+
+            <form class="layout__body__model" id="type__model">
+                    <a class="btn btn--main" id="button_transversal_model">Transversal Model</a>
+                    <a class="btn btn--main" id="button_temporal_model">Temporal Model </a>
+            </form>
+
+            <form class="form__model" action="" method="" id="model_file">
+                {% csrf_token %}
+                
+                <div class="form__group">
+                    Update file:
+                    <input type="file" name="" clas="file_csv">
+                </div>
+
+            </form>
+
+            <div id="model_wb">
+                <form class="form" action="" method="" >
+                    {% csrf_token %}
+
+                    <label for='lang'>Select Year</label>
+                    <input  type="number" min="1900" max="2023" step="1" value="2016" name="year" />
+
+                    <div class="form__group">
+                        <label for="lang">Number of countries</label>
+                        <select name="n" id="NCountry" onchange="countrygenerator()">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group" id="input_country">
+                        <label for='lang'>Select Country</label><input list='brow_country'>
+                        <datalist id='brow_country'>
+                            {% for cont in country %}
+                            <option value='{{cont.name}}'></option>
+                            {% endfor %}
+                        </datalist>
+                        <label for='lang'>Select Country</label><input list='brow_country'>
+                        <datalist id='brow_country'>
+                            {% for cont in country %}
+                            <option value='{{cont.name}}'></option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="lang">Number of independent variables</label>
+                        <select name="n" id="NIndenVar" onchange="inputgenerator()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group" id="input_var">
+                    
+                    </div>
+                    
+                </form>
+
+                
+
+                
+            </div>
+                
+
+            <div id="submit_content">
+                <form class="form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form__action">
+                        <a class="btn btn--dark" href="index.html">Cancel</a>
+                        <button class="btn btn--main" type="submit">Submit</button>
+                    </div>
+                </form>
+                
+                {% include "base/script_js.html" %}
+
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+{% endblock content %}
+
