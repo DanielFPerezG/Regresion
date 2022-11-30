@@ -60,7 +60,7 @@
 
             </form>
 
-            <div id="model_wb">
+            <div id="model_wb_trans">
                 <form class="form" action="" method="" >
                     {% csrf_token %}
 
@@ -111,17 +111,89 @@
                     </div>
 
                     <div class="form__group" id="input_var">
-                    
+                        <label for='lang'>Select Dependent Variable</label>
+                        <input list='brow_var'>
+                        <datalist id='brow_var'>
+                            {% for var in variable %}
+                            
+                            <option value='{{var.name}}'></option>
+                            
+                            {% endfor %}
+                        </datalist>
+
+                        <label for='lang'>Select Independent Variable</label>
+                        <input list='brow_var'>
+                        <datalist id='brow_var'>
+                            {% for var in variable %}
+
+                            <option value='{{var.name}}'></option>
+
+                            {% endfor %}
+                        </datalist>
                     </div>
                     
-                </form>
+                </form> 
+            </div>
 
-                
+            <div id="model_wb_tem">
+                <form class="form" action="" method="" >
+                    {% csrf_token %}
 
-                
+                    <label for='lang'>Select Country</label>
+                    <input list='brow_country'>
+                    <datalist id='brow_country'>
+                        {% for cont in country %}
+                        <option value='{{cont.name}}'></option>
+                        {% endfor %}
+                    </datalist>
+                    <div>
+                        <label for='lang'>Select Initial Year</label>
+                        <input  type="number" min="1900" max="2023" step="1" value="2000" name="initial_year" />
+
+                        <label for='lang'>Select Final Year</label>
+                        <input  type="number" min="1900" max="2023" step="1" value="2018" name="final_year" />
+                    </div>
+
+
+                    <div class="form__group">
+                        <label for="lang">Number of independent variables</label>
+                        <select name="n" id="NIndenVar_tem" onchange="inputgenerator_tem()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group" id="input_var_tem">
+                        <label for='lang'>Select Dependent Variable</label>
+                        <input list='brow_var_tem'>
+                        <datalist id='brow_var_tem'>
+                            {% for var in variable %}
+                            
+                            <option value='{{var.name}}'></option>
+                            
+                            {% endfor %}
+                        </datalist>
+
+                        <label for='lang'>Select Independent Variable</label>
+                        <input list='brow_var_tem'>
+                        <datalist id='brow_var_tem'>
+                            {% for var in variable %}
+
+                            <option value='{{var.name}}'></option>
+
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                </form> 
+
             </div>
                 
-
             <div id="submit_content">
                 <form class="form" action="" method="POST">
                     {% csrf_token %}

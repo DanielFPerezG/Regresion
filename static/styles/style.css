@@ -1195,9 +1195,14 @@ a {
   display:none;
 }
 
-#model_wb{
+#model_wb_trans{
   display:none;
 }
+
+#model_wb_tem{
+  display:none;
+}
+
 #return_select_option{
   display:none;
   margin-bottom: 15px;

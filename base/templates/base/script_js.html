@@ -1,7 +1,8 @@
 
 <script>
     var file_var = document.getElementById("model_file")
-    var wb_var = document.getElementById("model_wb")
+    var wb_var_tem = document.getElementById("model_wb_tem")
+    var wb_var_trans = document.getElementById("model_wb_trans")
     var return_option = document.getElementById("return_select_option")
 
     var first_button = document.querySelector("#button_model_file")
@@ -20,9 +21,10 @@
     var count_model_wb = 0
 
     second_button.addEventListener("click", function showoption() {
-    if (wb_var.style.display === "none"){
+    if (wb_var_trans.style.display === "none"){
 
-        wb_var.style.display = "none"
+        wb_var_trans.style.display = "none"
+        wb_var_tem.style.display = "none"
         file_var.style.display = "none"
         
         button_content.style.display = "none"
@@ -35,7 +37,7 @@
         count_model_wb = 1
     }
     else {
-        wb_var.style.display = "none"
+        wb_var_trans.style.display = "none"
     }
     })
 
@@ -43,7 +45,8 @@
     if (file_var.style.display === "none"){
 
         file_var.style.display = "none"
-        wb_var.style.display = "none"
+        wb_var_trans.style.display = "none"
+        wb_var_tem.style.display = "none"
 
         button_content.style.display = "none"
         type_model_content.style.display = "grid"
@@ -63,7 +66,8 @@
         if (button_content.style.display === "none"){
             
             file_var.style.display = "none"
-            wb_var.style.display = "none"
+            wb_var_trans.style.display = "none"
+            wb_var_tem.style.display = "none"
     
             button_content.style.display = "grid"
             button_content.style.justifyContent= "space-evenly" 
@@ -84,7 +88,8 @@
             if (count_model_file == 1 && count_model_wb==0){
                 
                 type_model_content.style.display = "none"
-                wb_var.style.display = "none"
+                wb_var_trans.style.display = "none"
+                wb_var_tem.style.display = "none"
                 file_var.style.display = "block"
 
                 submit_content.style.display = "flex"
@@ -93,7 +98,8 @@
             }
             else if (count_model_file == 0 && count_model_wb==1){
                 type_model_content.style.display = "none"
-                wb_var.style.display = "block"
+                wb_var_trans.style.display = "block"
+                wb_var_tem.style.display = "none"
                 file_var.style.display = "none"
 
                 submit_content.style.display = "flex"
@@ -114,6 +120,16 @@
                 
                 submit_content.style.display = "flex"
                 submit_content.style.justifyContent = "end"
+            }
+            else if (count_model_file == 0 && count_model_wb==1){
+                type_model_content.style.display = "none"
+                wb_var_trans.style.display = "none"
+                wb_var_tem.style.display = "block"
+                file_var.style.display = "none"
+
+                submit_content.style.display = "flex"
+                submit_content.style.justifyContent = "end"
+
             }
             else {
                 wb_var.style.display = "none"
@@ -161,5 +177,27 @@
             console.log(i)
         }
         }
+    
+        function inputgenerator_tem() {
+            var a_tem = document.getElementById("NIndenVar_tem").value
+            var form_input_tem = document.getElementById("input_var_tem").innerHTML=""
+            inputs(a_tem)
+            }
+        
+            function inputs(a_tem) {
+            var form_input_tem = document.getElementById("input_var_tem")
+            for (let i = 0; i <= a_tem; i++) {
+                
+                var box_tem = document.createElement("div")
+                
+                form_input_tem.appendChild(box_tem)
+                if (i == 0){
+                    box_tem.innerHTML="<label for='lang'>Select Dependent Variable</label><input list='brow_var_tem'><datalist id='brow_var_tem'>{% for var in variable %}<option value='{{var.name}}'></option>{% endfor %}</datalist>"
+                }
+                else {
+                    box_tem.innerHTML="<label for='lang'>Select Independent Variable</label><input list='brow_var_tem'><datalist id='brow_var_tem'>{% for var in variable %}<option value='{{var.name}}'></option>{% endfor %}</datalist>"
+                }
+            }
+            }
 
 </script>
