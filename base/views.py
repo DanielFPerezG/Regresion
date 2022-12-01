@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic, Message, User, Variable, Country
 from .forms import RoomForm, UserForm, MyUserCreationForm
+from .test import Test
 
 
 #Create your views here.
@@ -197,22 +198,44 @@ def activityPage(request):
 
 @login_required(login_url='login')
 def createModel(request):
-    #q=request.GET.get('q') if request.GET.get('q') != None else ''
+    
     variable = Variable.objects.all()
     country = Country.objects.all()
-    # form = RoomForm()
-    # topics = Topic.objects.all()
-    # if request.method == "POST":
-    #     topic_name = request.POST.get('topic')
-    #     topic, created = Topic.objects.get_or_create(name=topic_name)
 
-    #     Room.objects.create(
-    #         host= request.user,
-    #         topic=topic,
-    #         name=request.POST.get('name'),
-    #         description=request.POST.get('description'),
-    #     )
-    #     return redirect('home')
+    var_tem_array = []
+    var_trans_array = []
+    country_array = []
+
+    if request.method == "POST":
+
+        if request.POST.get('country_tem') == "" and int(float(request.POST.get('year_t'))) > 1900:
+
+            year_trans = request.POST.get('year_t')
+
+            for i in range(int(request.POST.get('n_var_trans'))+1):
+                var_trans_array.append(request.POST.get(f'var_trans_{i+1}'))
+
+            for i in range(int(request.POST.get('n_country'))):
+
+                if i == 0:
+
+                    country_array.append(request.POST.get(f'country_ini'))
+
+                else:
+                    country_array.append(request.POST.get(f'country_{i+1}'))
+                    
+
+        elif request.POST.get('country_tem') != "" and int(request.POST.get('year_t')) <= 1900:
+
+            country_tem = request.POST.get('country_tem')
+
+            initial_year = request.POST.get('initial_year')
+
+            final_year = request.POST.get('final_year')
+
+            for i in range(int(request.POST.get('n_var_tem'))+1):
+                var_tem_array.append(request.POST.get(f'var_tem_{i+1}'))
+            
 
     #context = 
     return render(request, 'base/model_form.html', {'variable': variable, 'country' : country})
