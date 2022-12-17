@@ -62,3 +62,19 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+class VarModel(models.Model):
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=200)
+    variable = models.TextField()
+    country = models.TextField()
+    initial_date = models.DateField()
+    final_date = models.DateField()
+    type = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=['-created']
+
+    def __str__(self):
+        return self.name
