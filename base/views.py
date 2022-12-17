@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
-from .models import Room, Topic, Message, User, Variable, Country
+from .models import Room, Topic, Message, User, Variable, Country, VarModel
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from .test import Test
 
@@ -212,6 +212,8 @@ def createModel(request):
 
             year_trans = request.POST.get('year_t')
 
+            model_name = request.POST.get('trans_name')
+
             for i in range(int(request.POST.get('n_var_trans'))+1):
                 var_trans_array.append(request.POST.get(f'var_trans_{i+1}'))
 
@@ -223,9 +225,21 @@ def createModel(request):
 
                 else:
                     country_array.append(request.POST.get(f'country_{i+1}'))
+
+            VarModel.objects.create(
+                host= request.user,
+                name = model_name,
+                variable = var_trans_array,
+                country = country_array,
+                initial_date = year_trans,
+                type = "transversal"
+            )
+            return redirect('home')
                     
 
         elif request.POST.get('country_tem') != "" and int(request.POST.get('year_t')) <= 1900:
+
+            model_name = request.POST.get('tem_name')
 
             country_tem = request.POST.get('country_tem')
 
@@ -236,6 +250,15 @@ def createModel(request):
             for i in range(int(request.POST.get('n_var_tem'))+1):
                 var_tem_array.append(request.POST.get(f'var_tem_{i+1}'))
             
-
+            VarModel.objects.create(
+                host= request.user,
+                name = model_name,
+                variable = var_tem_array,
+                country = country_tem,
+                initial_date = initial_year,
+                final_year = final_year,
+                type = "temporal"
+            )
+            return redirect('home')
     #context = 
     return render(request, 'base/model_form.html', {'variable': variable, 'country' : country})

@@ -65,6 +65,11 @@
                 <div id="model_wb_trans">
                         {% csrf_token %}
 
+                        <div>
+                            <label for='lang'>Model Name</label>
+                            <input  type="text" value="Transversal Model X" name="trans_name" />
+                        </div>
+
                         <label for='lang'>Select Year</label>
                         <input  type="number" min="1900" max="2023" step="1" value="1900" name="year_t" />
 
@@ -138,6 +143,11 @@
 
                 <div id="model_wb_tem">
                         {% csrf_token %}
+
+                        <div>
+                            <label for='lang'>Model Name</label>
+                            <input  type="text" value="Temporal Model X" name="tem_name" />
+                        </div>
 
                         <label for='lang'>Select Country</label>
                         <input list='brow_country' name='country_tem'>
