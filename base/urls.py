@@ -21,4 +21,5 @@ urlpatterns = [
 
     path('activity/', views.activityPage, name="activity"),
     path('create-model/', views.createModel, name="create-model"),
+    path('model-list/', views.modelList, name="model-list"),
 ]

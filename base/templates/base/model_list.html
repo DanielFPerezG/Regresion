@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{% url 'home' %}">
+            <i class="material-icons">arrow_back</i>
+          </a>
+          <h3>Models</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        {% for mod in model %}
+        <div class="roomListRoom">
+            <div class="roomListRoom__header">
+                <a href="{% url 'user-profile' mod.host.id %}" class="roomListRoom__author">
+                    <div class="avatar avatar--small">
+                        <img src="{{mod.host.avatar.url}}" />
+                    </div>
+                    <span>@{{mod.host.username}}</span>
+                </a>
+                
+            </div>
+            <div class="roomListRoom__content_mod">
+                {% comment %} <a href="{% url 'mod' mod.id %}">{{mod.name}}</a> {% endcomment %}
+                <a href="#">{{mod.name}}</a>
+                <span>{{mod.created|timesince}}</span>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock content %}

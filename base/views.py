@@ -11,6 +11,8 @@ from .models import Room, Topic, Message, User, Variable, Country, VarModel
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from .test import Test
 
+import pandas as pd
+
 
 #Create your views here.
 
@@ -214,8 +216,11 @@ def createModel(request):
 
             model_name = request.POST.get('trans_name')
 
+            df_var = pd.DataFrame(list(Variable.objects.all().values()))
+
             for i in range(int(request.POST.get('n_var_trans'))+1):
-                var_trans_array.append(request.POST.get(f'var_trans_{i+1}'))
+                var = df_var.iloc[df_var.index[df_var['name']==request.POST.get(f'var_trans_{i+1}')],1]
+                var_trans_array.append(var.to_string(index=False))
 
             for i in range(int(request.POST.get('n_country'))):
 
@@ -247,8 +252,12 @@ def createModel(request):
 
             final_year = request.POST.get('final_year')
 
+            df_var = pd.DataFrame(list(Variable.objects.all().values()))
+
             for i in range(int(request.POST.get('n_var_tem'))+1):
-                var_tem_array.append(request.POST.get(f'var_tem_{i+1}'))
+
+                var = df_var.iloc[df_var.index[df_var['name']==request.POST.get(f'var_tem_{i+1}')],1]
+                var_tem_array.append(var.to_string(index=False))
             
             VarModel.objects.create(
                 host= request.user,
@@ -262,3 +271,9 @@ def createModel(request):
             return redirect('home')
     #context = 
     return render(request, 'base/model_form.html', {'variable': variable, 'country' : country})
+
+@login_required(login_url='login')
+def modelList(request):
+    model = VarModel.objects.filter(host=request.user)
+
+    return render(request, 'base/model_list.html', {'model':model})

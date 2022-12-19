@@ -68,8 +68,8 @@ class VarModel(models.Model):
     name = models.CharField(max_length=200)
     variable = models.TextField()
     country = models.TextField()
-    initial_date = models.DateField()
-    final_date = models.DateField()
+    initial_date = models.TextField()
+    final_date = models.TextField()
     type = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
 
