@@ -58,6 +58,7 @@ class Variable(models.Model):
         return self.var_id
 
 class Country(models.Model):
+    country_id = models.CharField(max_length=300, null=True)
     name = models.CharField(max_length=300, null=True)
 
     def __str__(self):

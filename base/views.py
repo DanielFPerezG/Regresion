@@ -217,6 +217,7 @@ def createModel(request):
             model_name = request.POST.get('trans_name')
 
             df_var = pd.DataFrame(list(Variable.objects.all().values()))
+            df_country = pd.DataFrame(list(Country.objects.all().values()))
 
             for i in range(int(request.POST.get('n_var_trans'))+1):
                 var = df_var.iloc[df_var.index[df_var['name']==request.POST.get(f'var_trans_{i+1}')],1]
@@ -225,11 +226,12 @@ def createModel(request):
             for i in range(int(request.POST.get('n_country'))):
 
                 if i == 0:
-
-                    country_array.append(request.POST.get(f'country_ini'))
+                    count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_ini')],1]
+                    country_array.append(count.to_string(index=False))
 
                 else:
-                    country_array.append(request.POST.get(f'country_{i+1}'))
+                    count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_{i+1}')],1]
+                    country_array.append(count.to_string(index=False))
 
             VarModel.objects.create(
                 host= request.user,
@@ -246,13 +248,17 @@ def createModel(request):
 
             model_name = request.POST.get('tem_name')
 
-            country_tem = request.POST.get('country_tem')
+            df_country = pd.DataFrame(list(Country.objects.all().values()))
+
+            count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_tem')],1]
+            country_tem = count.to_string(index=False)
 
             initial_year = request.POST.get('initial_year')
 
             final_year = request.POST.get('final_year')
 
             df_var = pd.DataFrame(list(Variable.objects.all().values()))
+            
 
             for i in range(int(request.POST.get('n_var_tem'))+1):
 
