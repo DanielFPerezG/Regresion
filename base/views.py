@@ -283,3 +283,8 @@ def modelList(request):
     model = VarModel.objects.filter(host=request.user)
 
     return render(request, 'base/model_list.html', {'model':model})
+
+def modelRoom(request, pk):
+    model = VarModel.objects.get(id=pk)
+
+    return render(request, 'base/model_room.html', {'model':model})

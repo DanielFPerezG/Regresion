@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <main class="profile-page layout layout--2">
+      <div class="container">
+        <!-- Room Start -->
+        <div class="room" style="flex-basis: 100%;">
+          <div class="room__top">
+            <div class="room__topLeft">
+              <a href="{% url 'home' %}">
+                <i class="material-icons">arrow_back</i>
+              </a>
+              <h3>{{model.name}}</h3>
+            </div>
+
+            {% if model.host == request.user %}
+            <div class="room__topRight">
+              {% comment "" %}<a href="{% url 'update-room' room.id %}">{% endcomment %}
+                <a href="#"></a>
+                <i class="material-icons">edit</i>
+              </a>
+              {% comment "" %}<a href="{% url 'delete-room' room.id %}">{% endcomment %}
+                <a href="#"></a>
+                <i class="material-icons">delete</i>
+              </a>
+            </div>
+            {% endif %}
+
+          </div>
+          <div class="room__box scroll" >
+            <div class="room__header scroll">
+              <div class="room__info">
+                <span>Created {{model.created|timesince}} ago</span>
+              </div>
+            </div>
+            <div class="room__conversation">
+              <div class="threads scroll" id="model_content">
+                <!-- 
+                    content model
+                -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
+{% endblock content %}

@@ -420,6 +420,7 @@ a {
 .layout--2 > .container > div:last-child {
   flex-basis: 25%;
 }
+
 /*========== Layout Box ==========*/
 
 .layout__box {
@@ -1059,6 +1060,7 @@ a {
   top: 4.4rem;
   padding-top: 2rem;
   padding-bottom: 1rem;
+  margin-top: 1.4rem;
 }
 
 @media screen and (max-width: 500px) {
@@ -1076,8 +1078,18 @@ a {
   padding-bottom: 0;
 }
 
+
+
 @media screen and (max-width: 500px) {
   .room__box {
+    padding-left: 2.5rem;
+    padding-right: 2rem;
+    height: 80.5vh;
+    overflow-y: auto;
+    padding-bottom: 0;
+  }
+
+  .room__box__model {
     padding-left: 2.5rem;
     padding-right: 2rem;
     height: 80.5vh;
@@ -1147,7 +1159,10 @@ a {
   margin-top: 28vh;
   padding: 0 2rem 4rem 2rem;
 }
-
+#model_content {
+  margin-top: 7rem;
+  
+}
 .thread {
   border-left: 2px solid var(--color-dark);
   padding-left: 1rem;
@@ -1222,6 +1237,7 @@ a {
 .participants__top {
   justify-content: flex-start;
   gap: 0.5rem;
+  margin-top: 1.4rem;
 }
 
 .participants__list {

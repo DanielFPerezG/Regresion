@@ -26,8 +26,7 @@
                 
             </div>
             <div class="roomListRoom__content_mod">
-                {% comment %} <a href="{% url 'mod' mod.id %}">{{mod.name}}</a> {% endcomment %}
-                <a href="#">{{mod.name}}</a>
+                <a href="{% url 'model-room' mod.id %}">{{mod.name}}</a>
                 <span>{{mod.created|timesince}}</span>
             </div>
         </div>
