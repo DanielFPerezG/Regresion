@@ -89,10 +89,10 @@
 
                         <div class="form__group" id="input_country">
                             <label for='lang'>Select Country</label>
-                            <input list='brow_country' name='country_ini' value={{cont.name}}>
+                            <input list='brow_country' name='country_ini'>
                             <datalist id='brow_country'>
                                 {% for cont in country %}
-                                <option value='{{cont.name}}'>{{cont.name}}</option>
+                                <option value='{{cont.country_id}}'>{{cont.name}}</option>
                                 {% endfor %}
                             </datalist>
 
@@ -101,7 +101,7 @@
                             <input list='brow_country' name='country_2'>
                             <datalist id='brow_country'>
                                 {% for cont in country %}
-                                <option value='{{cont.name}}'>{{cont.name}}</option>
+                                <option value='{{cont.country_id}}'>{{cont.name}}</option>
                                 {% endfor %}
                             </datalist>
                         </div>
@@ -122,10 +122,10 @@
 
                         <div class="form__group" id="input_var">
                             <label for='lang'>Select Dependent Variable</label>
-                            <input list='brow_var' name='var_trans_1' value={{var.name}}>
+                            <input list='brow_var' name='var_trans_1'>
                             <datalist id='brow_var'>
                                     {% for var in variable %}
-                                    <option value='{{var.name}}'>{{var.name}}</option>
+                                    <option value='{{var.var_id}}'>{{var.name}}</option>
                                     {% endfor %}
                             </datalist>
 
@@ -134,7 +134,7 @@
                             <datalist id='brow_var'>
 
                                 {% for var in variable %}
-                                <option value='{{var.name}}'>{{var.name}}</option>
+                                <option value='{{var.var_id}}'>{{var.name}}</option>
                                 {% endfor %}
                             </datalist>
                         </div>

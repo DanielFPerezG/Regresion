@@ -210,28 +210,55 @@ def createModel(request):
 
     if request.method == "POST":
 
+        # if request.POST.get('country_tem') == "" and int(float(request.POST.get('year_t'))) > 1900:
+
+        #     year_trans = request.POST.get('year_t')
+
+        #     model_name = request.POST.get('trans_name')
+
+        #     df_var = pd.DataFrame(list(Variable.objects.all().values()))
+        #     df_country = pd.DataFrame(list(Country.objects.all().values()))
+
+        #     for i in range(int(request.POST.get('n_var_trans'))+1):
+        #         var = df_var.iloc[df_var.index[df_var['name']==request.POST.get(f'var_trans_{i+1}')],1]
+        #         var_trans_array.append(var.to_string(index=False))
+
+        #     for i in range(int(request.POST.get('n_country'))):
+
+        #         if i == 0:
+        #             count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_ini')],1]
+        #             country_array.append(count.to_string(index=False))
+
+        #         else:
+        #             count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_{i+1}')],1]
+        #             country_array.append(count.to_string(index=False))
+
+        #     VarModel.objects.create(
+        #         host= request.user,
+        #         name = model_name,
+        #         variable = var_trans_array,
+        #         country = country_array,
+        #         initial_date = year_trans,
+        #         type = "transversal"
+        #     )
+        #     return redirect('home')
+
         if request.POST.get('country_tem') == "" and int(float(request.POST.get('year_t'))) > 1900:
 
             year_trans = request.POST.get('year_t')
-
             model_name = request.POST.get('trans_name')
 
-            df_var = pd.DataFrame(list(Variable.objects.all().values()))
-            df_country = pd.DataFrame(list(Country.objects.all().values()))
-
             for i in range(int(request.POST.get('n_var_trans'))+1):
-                var = df_var.iloc[df_var.index[df_var['name']==request.POST.get(f'var_trans_{i+1}')],1]
-                var_trans_array.append(var.to_string(index=False))
+                
+                var_trans_array.append(request.POST.get(f'var_trans_{i+1}'))
 
             for i in range(int(request.POST.get('n_country'))):
 
                 if i == 0:
-                    count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_ini')],1]
-                    country_array.append(count.to_string(index=False))
+                    country_array.append(request.POST.get(f'country_ini'))
 
                 else:
-                    count = df_country.iloc[df_country.index[df_country['name']==request.POST.get(f'country_{i+1}')],1]
-                    country_array.append(count.to_string(index=False))
+                    country_array.append(request.POST.get(f'country_{i+1}'))
 
             VarModel.objects.create(
                 host= request.user,
