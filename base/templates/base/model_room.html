@@ -40,13 +40,38 @@
                     content model
                 -->
 
+                <table id="table-data-model" >
+                  <thead>
+                    <tr>
+                      {% for col in data.columns %}
+                        <th>
+                          {{col}}
+                        </th>
+                      {% endfor %}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for index, row in data.iterrows %}
+                      <tr>
+                        {% for cell in row %}
+                          <td>
+                            {{cell}}
+                          </td>
+                        {% endfor %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <script src="script.js"></script>
+    {% include "base/script_js.html" %}
   </body>
 </html>
 {% endblock content %}

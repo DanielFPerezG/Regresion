@@ -25,7 +25,7 @@ def run():
     for count in range(len(df_country)):
 
         country = Country(
-            country_id = df_country.iloc[count]['iso3c'],
+            country_id = df_country.iloc[count]['iso2c'],
             name = df_country.iloc[count]['name']
         )
         country.save()

@@ -1161,7 +1161,7 @@ a {
   padding: 0 2rem 4rem 2rem;
 }
 #model_content {
-  margin-top: 7rem;
+  margin-top: 5rem;
   
 }
 .thread {
@@ -1300,4 +1300,12 @@ a {
 #submit_content{
   margin-top: 15px;
   display: none
+}
+
+/*==============================
+=>  Create Model
+================================*/
+
+#table-data-model_wrapper {
+  margin-top: 3rem;
 }

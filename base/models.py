@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -67,12 +68,9 @@ class Country(models.Model):
 class VarModel(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
-    variable = models.TextField()
-    country = models.TextField()
-    initial_date = models.TextField()
-    final_date = models.TextField()
     type = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
+    json_data = models.JSONField(default='{}')
 
     class Meta:
         ordering=['-created']

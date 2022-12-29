@@ -1,6 +1,6 @@
 from imaplib import _Authenticator
 from multiprocessing import context
-import re
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -11,7 +11,11 @@ from .models import Room, Topic, Message, User, Variable, Country, VarModel
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from .test import Test
 
+from pandas_datareader import wb
 import pandas as pd
+from datetime import datetime
+import re
+import ast
 
 
 #Create your views here.
@@ -217,22 +221,30 @@ def createModel(request):
     if request.method == "POST":
 
         if country_tem == "" and int(year_trans) > 1900:
+            data = wb.download(
+                indicator = var_trans,
+                country = country_trans,
+                start= int(year_trans),
+                end= int(year_trans)
+            )
+            data = data.reset_index()
 
-            VarModel.objects.create(
+            json_data = data.to_json(orient='columns')
+
+            model = VarModel.objects.create(
                 host= request.user,
                 name = model_name_trans,
-                variable = var_trans,
-                country = country_trans,
-                initial_date = year_trans,
-                type = "transversal"
+                type = "transversal",
+                json_data = json_data
             )
-            print(var_trans)
+
+            
             return redirect('home')
                     
 
         elif country_tem != "" and int(year_trans) <= 1900:
             
-            VarModel.objects.create(
+            model = VarModel.objects.create(
                 host= request.user,
                 name = model_name_tem,
                 variable = var_tem,
@@ -241,6 +253,16 @@ def createModel(request):
                 final_year = final_year,
                 type = "temporal"
             )
+            data = wb.download(
+                indicator = var_tem,
+                country = country_tem,
+                start= initial_year,
+                end= final_year
+            )
+            data = data.reset_index()
+            data.index.name = "id"
+
+            data.to_csv(f'base/file_csv/model_data/{model.pk}.csv')
             return redirect('home')
     #context = 
     return render(request, 'base/model_form.html', {'variable': variable, 'country' : country})
@@ -253,8 +275,10 @@ def modelList(request):
 
 def modelRoom(request, pk):
     model = VarModel.objects.get(id=pk)
+    
+    data = pd.read_json(model.json_data, orient='columns')
 
-    return render(request, 'base/model_room.html', {'model':model})
+    return render(request, 'base/model_room.html', {'model':model, 'data':data})
 
 def prueba(request):
     
