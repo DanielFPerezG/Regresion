@@ -1,0 +1,110 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="create-room layout">
+<div class="container">
+    <div class="layout__box">
+        <div class="layout__boxHeader">
+            <div class="layout__boxTitle">
+            <a href="{% url 'home' %}">
+                <i class="material-icons">arrow_back</i>
+            </a>
+            <h3>Prueba</h3>
+            </div>
+        </div>
+        <div class="layout__body">
+            <form class="form" action="" method="POST">
+
+                <div>
+                    {% csrf_token %}
+
+                    <div class="form__group">
+                        <label for='lang'>Model Name</label>
+                        <input  type="text" value="Transversal Model X" name="trans_name" />
+                    </div>
+
+                    <div class="form__group">
+                    <label for='lang'>Select Year</label>
+                    <input  type="number" min="1900" max="2023" step="1" value="1900" name="year_t" />
+                    </div>
+
+                    <div class="form__group">
+                        <label for="lang">Number of countries</label>
+                        <select name="n_country" id="NCountry" onchange="countrygenerator()">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group" id="input_country">
+                        <label for='lang'>Select Country</label>
+                        <select id="select-country" name='country_ini' multiple="multiple" >
+                            {% for cont in country %}
+                            <option value='{{cont.country_id}}'>{{cont.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+
+                    <div class="form__group">
+                        <label for="lang">Number of independent variables</label>
+                        <select name="n_var_trans" id="NIndenVar" onchange="inputgenerator()">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
+
+                    <div class="form__group" id="input_var">
+                        <label for='lang'>Select Dependent Variable</label>
+                        <input list='brow_var' name='var_trans_1'>
+                        <datalist id='brow_var'>
+                                {% for var in variable %}
+                                <option value='{{var.var_id}}'>{{var.name}}</option>
+                                {% endfor %}
+                        </datalist>
+
+                        <label for='lang'>Select Independent Variable</label>
+                        <input list='brow_var' name='var_trans_2'>
+                        <datalist id='brow_var'>
+
+                            {% for var in variable %}
+                            <option value='{{var.var_id}}'>{{var.name}}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    
+            </div>
+        
+                <div class="form__action" id="submit_content">
+                    <a class="btn btn--dark" href="index.html">Cancel</a>
+                    <button class="btn btn--main" type="submit">Submit</button>
+                </div>
+                    
+                {% include "base/script_js.html" %}
+                <script>
+                    $(document).ready(function() {
+                        $("#select-country").select2();
+                    });
+                </script>
+
+            </div>
+        </form>
+    </div>
+</div>
+</main>
+
+{% endblock content %}
+

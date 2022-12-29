@@ -1,5 +1,6 @@
 
 <script>
+    
     var file_var = document.getElementById("model_file")
     var wb_var_tem = document.getElementById("model_wb_tem")
     var wb_var_trans = document.getElementById("model_wb_trans")
@@ -19,6 +20,10 @@
 
     var count_model_file = 0
     var count_model_wb = 0
+
+    $(document).ready(function() {
+        $(".select2-multiple").select2({ width: '100%' });
+    });
 
     second_button.addEventListener("click", function showoption() {
     if (wb_var_trans.style.display === "none"){
@@ -136,72 +141,4 @@
             }
             })
     
-
-    function inputgenerator() {
-    var a = document.getElementById("NIndenVar").value
-    var form_input = document.getElementById("input_var").innerHTML=""
-    inputs(a)
-    }
-
-    function inputs(a) {
-    var form_input = document.getElementById("input_var")
-    for (let i = 0; i <= a; i++) {
-        
-        var box = document.createElement("div")
-        
-        form_input.appendChild(box)
-        if (i == 0){
-            box.innerHTML="<label for='lang'>Select Dependent Variable</label><input list='brow_var' name='var_trans_1'><datalist id='brow_var'>{% for var in variable %}<option value='{{var.name}}'>{{var.name}}</option>{% endfor %}</datalist>"
-        }
-        else {
-            box.innerHTML="<label for='lang'>Select Independent Variable</label><input list='brow_var' name='var_trans_"+(i+1)+"'><datalist id='brow_var'>{% for var in variable %}<option value='{{var.name}}'{{var.name}}</option>{% endfor %}</datalist>"
-        }
-    }
-    }
-
-    function countrygenerator() {
-        var b = document.getElementById("NCountry").value
-        var form_country = document.getElementById("input_country").innerHTML=""
-        countries(b)
-        }
-    
-    function countries(b) {
-        var form_country = document.getElementById("input_country")
-        for (let i = 0; i <= b-1; i++) {
-            
-            var box_country = document.createElement("div")
-            
-            form_country.appendChild(box_country)
-            
-            if (i == 0){
-                box_country.innerHTML="<label for='lang'>Select Country</label><input list='brow_country' name='country_ini'><datalist id='brow_country'>{% for cont in country %}<option value='{{cont.name}}'>{{cont.name}}</option>{% endfor %}</datalist>"
-            }
-            else {
-                box_country.innerHTML="<label for='lang'>Select Country</label><input list='brow_country' name='country_"+(i+1)+"'><datalist id='brow_country'>{% for cont in country %}<option value='{{cont.name}}'>{{cont.name}}</option>{% endfor %}</datalist>"
-            }
-        }
-        }
-    
-        function inputgenerator_tem() {
-            var a_tem = document.getElementById("NIndenVar_tem").value
-            var form_input_tem = document.getElementById("input_var_tem").innerHTML=""
-            inputs_tem(a_tem)
-            }
-        
-            function inputs_tem(a_tem) {
-            var form_input_tem = document.getElementById("input_var_tem")
-            for (let i = 0; i <= a_tem; i++) {
-                
-                var box_tem = document.createElement("div")
-                
-                form_input_tem.appendChild(box_tem)
-                if (i == 0){
-                    box_tem.innerHTML="<label for='lang'>Select Dependent Variable</label><input list='brow_var_tem' name='var_tem_1'><datalist id='brow_var_tem'>{% for var in variable %}<option value='{{var.name}}'>{{var.name}}</option>{% endfor %}</datalist>"
-                }
-                else {
-                    box_tem.innerHTML="<label for='lang'>Select Independent Variable</label><input list='brow_var_tem' name='var_tem_"+(i+1)+"' ><datalist id='brow_var_tem'>{% for var in variable %}<option value='{{var.name}}'>{{var.name}}</option>{% endfor %}</datalist>"
-                }
-            }
-            }
-
 </script>

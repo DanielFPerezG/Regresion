@@ -8,12 +8,7 @@
         <div class="layout__boxHeader">
             <div class="layout__boxTitle">
             <a href="{% url 'home' %}">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                <title>arrow-left</title>
-                <path
-                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
-                </path>
-                </svg>
+                <i class="material-icons">arrow_back</i>
             </a>
             <h3>Create Model</h3>
             </div>
@@ -28,21 +23,11 @@
                 <div class="layout__body__model" action="" method="" id="content_buttons_model">
                     
                     <a class="btn btn--main" id="button_model_file">
-                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <title>add</title>
-                        <path
-                            d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
-                        ></path>
-                        </svg>
+                        <i class="material-icons">add</i>
                         Update File
                     </a>
                     <a class="btn btn--main" id="button_model_wb">
-                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <title>add</title>
-                        <path
-                            d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
-                        ></path>
-                        </svg>
+                        <i class="material-icons">add</i>
                         World Bank Data Base
                     </a>
                 </div>
@@ -65,78 +50,32 @@
                 <div id="model_wb_trans">
                         {% csrf_token %}
 
-                        <div>
+                        <div class="form__group">
                             <label for='lang'>Model Name</label>
                             <input  type="text" value="Transversal Model X" name="trans_name" />
                         </div>
 
-                        <label for='lang'>Select Year</label>
-                        <input  type="number" min="1900" max="2023" step="1" value="1900" name="year_t" />
-
                         <div class="form__group">
-                            <label for="lang">Number of countries</label>
-                            <select name="n_country" id="NCountry" onchange="countrygenerator()">
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                            </select>
+                            <label for='lang'>Select Year</label>
+                            <input  type="number" min="1900" max="2023" step="1" value="1900" name="year_t" />
                         </div>
 
-                        <div class="form__group" id="input_country">
-                            <label for='lang'>Select Country</label>
-                            <input list='brow_country' name='country_ini'>
-                            <datalist id='brow_country'>
+                        <div class="form__group " id="input_country">
+                            <label for='lang'>Select Countries</label>
+                            <select class="select2-multiple" name='country_trans' multiple="multiple" >
                                 {% for cont in country %}
                                 <option value='{{cont.country_id}}'>{{cont.name}}</option>
                                 {% endfor %}
-                            </datalist>
-
-
-                            <label for='lang'>Select Country</label>
-                            <input list='brow_country' name='country_2'>
-                            <datalist id='brow_country'>
-                                {% for cont in country %}
-                                <option value='{{cont.country_id}}'>{{cont.name}}</option>
-                                {% endfor %}
-                            </datalist>
-                        </div>
-
-                        <div class="form__group">
-                            <label for="lang">Number of independent variables</label>
-                            <select name="n_var_trans" id="NIndenVar" onchange="inputgenerator()">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
                             </select>
                         </div>
 
                         <div class="form__group" id="input_var">
-                            <label for='lang'>Select Dependent Variable</label>
-                            <input list='brow_var' name='var_trans_1'>
-                            <datalist id='brow_var'>
-                                    {% for var in variable %}
-                                    <option value='{{var.var_id}}'>{{var.name}}</option>
-                                    {% endfor %}
-                            </datalist>
-
-                            <label for='lang'>Select Independent Variable</label>
-                            <input list='brow_var' name='var_trans_2'>
-                            <datalist id='brow_var'>
-
+                            <label for='lang'>Select Variables</label>
+                            <select class="select2-multiple" name='var_trans' multiple="multiple" >
                                 {% for var in variable %}
                                 <option value='{{var.var_id}}'>{{var.name}}</option>
                                 {% endfor %}
-                            </datalist>
+                            </select>
                         </div>
                         
                 </div>
@@ -144,19 +83,21 @@
                 <div id="model_wb_tem">
                         {% csrf_token %}
 
-                        <div>
+                        <div class="form__group">
                             <label for='lang'>Model Name</label>
                             <input  type="text" value="Temporal Model X" name="tem_name" />
                         </div>
 
-                        <label for='lang'>Select Country</label>
-                        <input list='brow_country' name='country_tem'>
-                        <datalist id='brow_country'>
-                            {% for cont in country %}
-                            <option value='{{cont.name}}'>{{cont.name}}</option>
-                            {% endfor %}
-                        </datalist>
-                        <div>
+                        <div class="form__group" id="input_country">
+                            <label for='lang'>Select Countries</label>
+                            <select id="select-country" name='country_tem' >
+                                <option value=""></option>
+                                {% for cont in country %}
+                                <option value='{{cont.country_id}}'>{{cont.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form__group">
                             <label for='lang'>Select Initial Year</label>
                             <input  type="number" min="1900" max="2023" step="1" value="2000" name="initial_year" />
 
@@ -164,43 +105,14 @@
                             <input  type="number" min="1900" max="2023" step="1" value="2018" name="final_year" />
                         </div>
 
-
-                        <div class="form__group">
-                            <label for="lang">Number of independent variables</label>
-                            <select name="n_var_tem" id="NIndenVar_tem" onchange="inputgenerator_tem()">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                        <div class="form__group" id="input_var_tem">
+                            <label for='lang'>Select Variables</label>
+                            <select id="select-var" name='var_tem' multiple="multiple" >
+                                {% for var in variable %}
+                                <option value='{{var.var_id}}'>{{var.name}}</option>
+                                {% endfor %}
                             </select>
                         </div>
-
-                        <div class="form__group" id="input_var_tem">
-                            <label for='lang'>Select Dependent Variable</label>
-                            <input list='brow_var_tem' name='var_tem_1'>
-                            <datalist id='brow_var_tem'>
-                                {% for var in variable %}
-                                
-                                <option value='{{var.name}}'>{{var.name}}</option>
-                                
-                                {% endfor %}
-                            </datalist>
-
-                            <label for='lang'>Select Independent Variable</label>
-                            <input list='brow_var_tem' name='var_tem_2'>
-                            <datalist id='brow_var_tem'>
-                                {% for var in variable %}
-
-                                <option value='{{var.name}}'>{{var.name}}</option>
-
-                                {% endfor %}
-                            </datalist>
-                        </div>
-
                 </div>
         
                 <div class="form__action" id="submit_content">
